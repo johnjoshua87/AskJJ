@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>What would JJ do?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background: #EF0107; /* Arsenal red default */
+      color: white;
+      transition: background-color 0.8s ease;
+    }
+    #logo {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+    #quote-box {
+      font-size: 1.5em;
+      margin: 20px auto;
+      padding: 20px;
+      width: 60%;
+      background: white;
+      color: #EF0107;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out, background-color 0.8s ease, color 0.8s ease;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      color: white;
+      background: #EF0107;
+      transition: background-color 0.8s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <img id="logo" src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" alt="Arsenal Logo">
+  <h1>Ask JJ</h1>
+  <div id="quote-box"><em>Click the button to see what JJ would say</em></div>
+  <button id="ask-btn" onclick="newQuote()">Ask JJ</button>
+
+  <script>
+    const quotes = [
+      "Gotta lose money to make money",
+      "What would Arteta do?",
+      "Are you going to run into the fire or away from it?",
+      "You know the answer - we hate Chelsea",
+      "Just say yes and figure it out later",
+      "Sounds tough. Would you like to see a picture of my fox hut?",
+      "Reduce those forecasts by half - no one watches Chelsea"
+    ];
+
+    const arsenalColors = ["#EF0107", "#FFFFFF", "#FFD700"]; // Red, White, Gold
+
+    let lastIndex = -1;
+
+    function newQuote() {
+      // pick a new random quote
+      let randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * quotes.length);
+      } while (randomIndex === lastIndex);
+      lastIndex = randomIndex;
+
+      const quoteBox = document.getElementById("quote-box");
+      const askBtn = document.getElementById("ask-btn");
+
+      // fade out text
+      quoteBox.style.opacity = 0;
+
+      setTimeout(() => {
+        // change quote text
+        quoteBox.innerText = quotes[randomIndex];
+        // fade back in
+        quoteBox.style.opacity = 1;
+
+        // pick a random Arsenal-themed color
+        const newColor = arsenalColors[Math.floor(Math.random() * arsenalColors.length)];
+
+        // update background and button
+        document.body.style.backgroundColor = newColor;
+        askBtn.style.backgroundColor = newColor;
+
+        // switch quote-box text color for readability
+        if(newColor === "#FFFFFF") {
+          quoteBox.style.color = "#EF0107"; // red text on white
+        } else {
+          quoteBox.style.color = "#FFFFFF"; // white text on red/gold
+        }
+      }, 500);
+    }
+  </script>
+
+</body>
+</html>
